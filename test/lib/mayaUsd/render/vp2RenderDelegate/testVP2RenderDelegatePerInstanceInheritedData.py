@@ -69,6 +69,43 @@ class testVP2RenderDelegatePerInstanceInheritedData(imageUtils.ImageDiffingTestC
 
     def testPerInstanceInheritedData(self):
         self._StartTest('perInstanceInheritedData')
+        # do some tests to check that selection hi-lights works as expected
+        mayaPathSegment = mayaUtils.createUfePathSegment('|stage|stageShape')
+
+        ball_01PathSegment = usdUtils.createUfePathSegment('/root/group/ball_01')
+        ball_01Path = ufe.Path([mayaPathSegment, ball_01PathSegment])
+        ball_01Item = ufe.Hierarchy.createItem(ball_01Path)
+
+        ball_02PathSegment = usdUtils.createUfePathSegment('/root/group/ball_02')
+        ball_02Path = ufe.Path([mayaPathSegment, ball_02PathSegment])
+        ball_02Item = ufe.Hierarchy.createItem(ball_02Path)
+
+        ball_03PathSegment = usdUtils.createUfePathSegment('/root/group/ball_03')
+        ball_03Path = ufe.Path([mayaPathSegment, ball_03PathSegment])
+        ball_03Item = ufe.Hierarchy.createItem(ball_03Path)
+
+        newSelection = ufe.Selection()
+        globalSelection = ufe.GlobalSelection.get()
+
+        newSelection.append(ball_01Item)
+        globalSelection.replaceWith(newSelection)
+        self.assertSnapshotClose('%s_select_ball_01.png' % self._testName)
+        globalSelection.clear()
+        newSelection.clear()
+
+        newSelection.append(ball_02Item)
+        globalSelection.replaceWith(newSelection)
+        self.assertSnapshotClose('%s_select_ball_02.png' % self._testName)
+        globalSelection.clear()
+        newSelection.clear()
+
+        newSelection.append(ball_01Item)
+        newSelection.append(ball_02Item)
+        newSelection.append(ball_03Item)
+        globalSelection.replaceWith(newSelection)
+        self.assertSnapshotClose('%s_select_ball_01_02_03.png' % self._testName)
+        globalSelection.clear()
+        newSelection.clear()
     
     def testPerInstanceInheritedDataPartialOverridePxrMtls(self):
         self._StartTest('inheritedDisplayColor_noPxrMtls')
