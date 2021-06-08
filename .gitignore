@@ -66,6 +66,10 @@ __pycache__/
 *.dylib
 *.dll
 
+## REZ ##
+_rez_build
+.vscode
+
 ##### Platform Specific Ignores #####
 
 ## macOS ##
