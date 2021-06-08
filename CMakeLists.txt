@@ -17,22 +17,35 @@ cmake_minimum_required(VERSION 3.13...3.17)
 
 project(maya-usd)
 
+################ REZ overrides (start)
+set(REZ_PXR_USE_PYTHON_3 OFF)
+if($ENV{REZ_PYTHON_VERSION} EQUAL "3.7.7")
+    set(REZ_PXR_USE_PYTHON_3 ON)
+endif()
+
+set(PXR_USD_LOCATION $ENV{USD_LOCATION})
+set(MARKUPSAFE_LOCATION $ENV{REZ_MARKUPSAFE_ROOT})
+set(JINJA_LOCATION $ENV{REZ_JINJA2_ROOT})
+set(MAYA_DEVKIT_LOCATION "$ENV{DEVKIT_LOCATION}")
+set(QT_LOCATION "$ENV{QT_LOCATION}")
+################ REZ overrides (end)
+
 #------------------------------------------------------------------------------
 # options
 #------------------------------------------------------------------------------
 option(BUILD_MAYAUSD_LIBRARY "Build Core USD libraries." ON)
 option(BUILD_ADSK_PLUGIN "Build Autodesk USD plugin." ON)
-option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." ON)
-option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." ON)
+option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." OFF)
+option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." OFF)
 # Default value made dependent on maya + usd version - see below
 #   Convert back to a normal option if we no longer support maya-2019, or
 #   no longer support USD-20.11
 #option(BUILD_HDMAYA "Build the Maya-To-Hydra plugin and scene delegate." ON)
 option(BUILD_RFM_TRANSLATORS "Build translators for RenderMan for Maya shaders." ON)
-option(BUILD_TESTS "Build tests." ON)
+option(BUILD_TESTS "Build tests." OFF)
 option(BUILD_STRICT_MODE "Enforce all warnings as errors." ON)
 option(BUILD_SHARED_LIBS "Build libraries as shared or static." ON)
-option(BUILD_WITH_PYTHON_3 "Build with python 3." OFF)
+option(BUILD_WITH_PYTHON_3 "Build with python 3." ${REZ_PXR_USE_PYTHON_3})
 option(CMAKE_WANT_UFE_BUILD "Enable building with UFE (if found)." ON)
 option(CMAKE_WANT_MATERIALX_BUILD "Enable building with MaterialX (experimental)." OFF)
 

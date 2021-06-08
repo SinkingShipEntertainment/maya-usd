@@ -161,11 +161,13 @@ endif()
 find_path(MAYA_INCLUDE_DIR
         maya/MFn.h
     HINTS
+        "$ENV{REZ_MAYA_ROOT}"
         "${MAYA_LOCATION}"
         "$ENV{MAYA_LOCATION}"
         "${MAYA_BASE_DIR}"
     PATH_SUFFIXES
         ../../devkit/include/
+        devkitBase/include/
         include/
     DOC
         "Maya's headers path"
@@ -174,11 +176,13 @@ find_path(MAYA_INCLUDE_DIR
 find_path(MAYA_LIBRARY_DIR
         OpenMaya
     HINTS
+        "$ENV{REZ_MAYA_ROOT}"
         "${MAYA_LOCATION}"
         "$ENV{MAYA_LOCATION}"
         "${MAYA_BASE_DIR}"
     PATH_SUFFIXES
         ../../devkit/include/
+        devkitBase/include/
         include/
     DOC
         "Maya's libraries path"
@@ -189,11 +193,13 @@ list(APPEND MAYA_INCLUDE_DIRS ${MAYA_INCLUDE_DIR})
 find_path(MAYA_DEVKIT_INC_DIR
        GL/glext.h
     HINTS
+        "$ENV{REZ_MAYA_ROOT}"
         "${MAYA_LOCATION}"
         "$ENV{MAYA_LOCATION}"
         "${MAYA_BASE_DIR}"
     PATH_SUFFIXES
         ../../devkit/plug-ins/
+        devkitBase/devkit/plug-ins/
     DOC
         "Maya's devkit headers path"
 )
