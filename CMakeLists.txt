@@ -18,16 +18,18 @@ cmake_minimum_required(VERSION 3.13...3.17)
 project(maya-usd)
 
 ################ REZ overrides (start)
-set(REZ_PXR_USE_PYTHON_3 OFF)
-if($ENV{REZ_PYTHON_VERSION} EQUAL "3.7.7")
-    set(REZ_PXR_USE_PYTHON_3 ON)
-endif()
+#set(REZ_PXR_USE_PYTHON_3 OFF)
+#if($ENV{REZ_PYTHON_VERSION} EQUAL "3.7.7")
+#    set(REZ_PXR_USE_PYTHON_3 ON)
+#endif()
 
-set(PXR_USD_LOCATION $ENV{USD_LOCATION})
+#set(PXR_USD_LOCATION $ENV{USD_LOCATION})
 set(MARKUPSAFE_LOCATION $ENV{REZ_MARKUPSAFE_ROOT})
 set(JINJA_LOCATION $ENV{REZ_JINJA2_ROOT})
 set(MAYA_DEVKIT_LOCATION "$ENV{DEVKIT_LOCATION}")
 set(QT_LOCATION "$ENV{QT_LOCATION}")
+set(AUTOGEN_PARALLEL $ENV{BUILD_NUM_JOBS})
+set(CMAKE_AUTOGEN_PARALLEL $ENV{BUILD_NUM_JOBS})
 ################ REZ overrides (end)
 
 #------------------------------------------------------------------------------
