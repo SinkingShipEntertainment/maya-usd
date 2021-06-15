@@ -4,7 +4,8 @@ authors = [
     "Autodesk"
 ]
 
-version = "0.9.0"
+# NOTE: version = <mayausd_version>.sse.<sse_version>
+version = "0.9.0.sse.1.0.0"
 
 description = \
     """
@@ -29,41 +30,50 @@ with scope("config") as c:
     #c.build_thread_count = "physical_cores"
 
 requires = [
-    "gcc-6.3",
-    "maya-2022.0",
-    "PyOpenGL",
-    "Jinja2",
-    "PyYAML",
-    "PySide2",
 ]
 
 private_build_requires = [
     "cmake",
-    "python-2.7",
+    #"usd-20.08.sse.2",
+    "PyOpenGL",
+    "Jinja2",
+    "PyYAML",
+    "PySide2",
     "maya_devkit-2022",
     "qtbase-5.15.2",
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "usd-20.08"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "~python-2", "usd-20.08.sse.2"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "~python-3", "usd-20.08.sse.3"],
 ]
 
 build_command = "bash {root}/rez_build.sh {root}"
 
-# If want to use Ninja, run the `rez-build -i --cmake-build-system "ninja"`
-# or `rez-release --cmake-build-system "ninja"`
-
 uuid = "repository.maya-usd"
 
+def pre_build_commands():
+    command("source /opt/rh/devtoolset-6/enable")
+
+    # To build against USD from Maya installation
+    # NOTE: It's not working at this moment
+    #env.MAYA_PXRUSD3_LOCATION = "/usr/autodesk/mayausd/maya2022/0.8.0_202102180129-2f83c8f/mayausd/USD3"
+    #env.MAYA_PXRUSD2_LOCATION = "/usr/autodesk/mayausd/maya2022/0.8.0_202102180129-2f83c8f/mayausd/USD2"
+
 def commands():
-    # NOTE: REZ package versions can have "-" to separate the external
+
+    # NOTE: REZ package versions can have ".sse." to separate the external
     # version from the internal modification version.
-    # Example: 0.9.0-sse.1
-    # 0.9.0 is the maya-usd version and sse.1 is the internal version
-    split_versions = str(version).split('-')
-    env.MAYA_USD_VERSION.set(split_versions[0])
+    split_versions = str(version).split(".sse.")
+    external_version = split_versions[0]
+    internal_version = None
     if len(split_versions) == 2:
-        env.MAYA_USD_PACKAGE_VERSION.set(split_versions[1])
+        internal_version = split_versions[1]
+
+    env.MAYA_USD_VERSION = external_version
+    env.MAYA_USD_PACKAGE_VERSION = external_version
+    if internal_version:
+        env.MAYA_USD_PACKAGE_VERSION = internal_version
 
     env.MAYA_USD_ROOT.append("{root}")
     env.MAYA_USD_LOCATION.append("{root}")
