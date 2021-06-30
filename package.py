@@ -33,8 +33,6 @@ requires = [
 ]
 
 private_build_requires = [
-    "cmake",
-    #"usd-20.08.sse.2",
     "PyOpenGL",
     "Jinja2",
     "PyYAML",
@@ -44,21 +42,16 @@ private_build_requires = [
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "~python-2", "usd-20.08.sse.2"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "~python-3", "usd-20.08.sse.3"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "python-2", "usd_bare-21.05.sse.1"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "python-3", "usd_bare-21.05.sse.1"],
 ]
 
-build_command = "bash {root}/rez_build.sh {root}"
+#build_command = "bash {root}/rez_build.sh {root}"
 
 uuid = "repository.maya-usd"
 
 def pre_build_commands():
     command("source /opt/rh/devtoolset-6/enable")
-
-    # To build against USD from Maya installation
-    # NOTE: It's not working at this moment
-    #env.MAYA_PXRUSD3_LOCATION = "/usr/autodesk/mayausd/maya2022/0.8.0_202102180129-2f83c8f/mayausd/USD3"
-    #env.MAYA_PXRUSD2_LOCATION = "/usr/autodesk/mayausd/maya2022/0.8.0_202102180129-2f83c8f/mayausd/USD2"
 
 def commands():
 
@@ -79,9 +72,4 @@ def commands():
     env.MAYA_USD_LOCATION.append("{root}")
 
     # For Maya to locate the .mod file to setup env variables for plugins and libraries
-    env.MAYA_MODULE_PATH.append("{root}/module")
-    env.MAYA_LOAD_USD.append("ON")
-
-    env.PATH.append("{root}/module/mayausd/MayaUSD/lib")
-    env.PATH.append("{root}/module/mayausd/usd/bin")
-    env.PATH.append("{root}/module/mayausd/usd/lib")
+    env.MAYA_MODULE_PATH.append("{root}")
