@@ -163,7 +163,7 @@ mayaUsd_compile_config(${PROJECT_NAME})
 # -----------------------------------------------------------------------------
 # include directories
 # -----------------------------------------------------------------------------
-target_include_directories(${PROJECT_NAME} 
+target_include_directories(${PROJECT_NAME}
     PUBLIC
         ${MAYA_INCLUDE_DIRS}
         ${PXR_INCLUDE_DIRS}
@@ -242,7 +242,7 @@ install(TARGETS ${PROJECT_NAME}
 )
 
 if(IS_WINDOWS)
-    install(FILES $<TARGET_PDB_FILE:${PROJECT_NAME}> 
+    install(FILES $<TARGET_PDB_FILE:${PROJECT_NAME}>
         DESTINATION ${CMAKE_INSTALL_PREFIX}/lib OPTIONAL
     )
 endif()
