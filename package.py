@@ -42,11 +42,19 @@ private_build_requires = [
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "python-2", "usd_bare-20.08.sse.1"],
-    #["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "python-3", "usd_bare-20.08.sse.1"],  # It is not finding Boost::python (don't know why)
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "python-2", "usd_bare-21.05.sse.1"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "python-3", "usd_bare-21.05.sse.1"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "python-2", "usd-20.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "python-3", "usd-20.08.sse.1", "!ptex"],  # It is not finding Boost::python (don't know why)
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.2", "python-2", "usd-21.05.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.0.sse.3", "python-3", "usd-21.05.sse.1", "!ptex"],
 ]
+
+# If want to use Ninja, run:
+# rez-build -i --cmake-build-system "ninja"
+# rez-release --cmake-build-system "ninja"
+#
+# Pass cmake arguments:
+# rez-build -i -- -DBoost_NO_BOOST_CMAKE=On -DBoost_NO_SYSTEM_PATHS=True
+# rez-release -- -DBoost_NO_BOOST_CMAKE=On -DBoost_NO_SYSTEM_PATHS=True
 
 uuid = "repository.maya-usd"
 
