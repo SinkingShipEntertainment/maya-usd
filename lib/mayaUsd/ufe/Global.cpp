@@ -237,7 +237,9 @@ MStatus initialize()
     //auto pointInstanceHandler
     //    = MayaUsd::ufe::UsdTransform3dPointInstanceHandler::create(mayaStackHandler);
 
-    // NOTE (Marcelo Sercheli): Forcing matrix to be the high-priority after point instance
+    // NOTE (Marcelo Sercheli): Forcing matrixHandler to be the high-priority after point instance
+    // Unfortunately matrixHandler is assuming the fallbackHandler is the next.
+    // See UsdTransform3dMatrixOp.cpp for details.
     auto fallbackHandler = MayaUsd::ufe::UsdTransform3dFallbackMayaXformStackHandler::create();
     auto commonAPIHandler = MayaUsd::ufe::UsdTransform3dCommonAPIHandler::create(fallbackHandler);
     auto mayaStackHandler = MayaUsd::ufe::UsdTransform3dMayaXformStackHandler::create(commonAPIHandler);
