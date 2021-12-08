@@ -369,6 +369,13 @@ UsdTransform3dMatrixOpHandler::transform3d(const Ufe::SceneItem::Ptr& item) cons
     bool             unused;
     auto             xformOps = xformable.GetOrderedXformOps(&unused);
 
+    // NOTE (Marcelo Sercheli): If there is no xformOps, then we create one.
+    if (xformOps.size() == 0) {
+        // This will create the XformOrderOp and transformOp
+        auto transform_op = xformable.MakeMatrixXform();
+        return UsdTransform3dMatrixOp::create(usdItem, transform_op);
+    }
+
     // If there is a single matrix transform op in the transform stack, then
     // transform3d() and editTransform3d() are equivalent: use that matrix op.
     if (xformOps.size() == 1 && xformOps.front().GetOpType() == UsdGeomXformOp::TypeTransform) {
