@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.14.0.sse.1.0.1"
+version = "0.14.0.sse.1.1.0"
 
 description = \
     """
@@ -42,10 +42,10 @@ private_build_requires = [
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.2.sse.2", "python-2", "usd-20.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.2.sse.3", "python-3", "usd-20.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.2.sse.2", "python-2", "usd-21.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.2.sse.3", "python-3", "usd-21.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "python-2", "usd-20.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "python-3", "usd-20.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "python-2", "usd-21.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "python-3", "usd-21.08.sse.1", "!ptex"],
 ]
 
 # If want to use Ninja, run:
