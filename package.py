@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.14.0.sse.1.1.0"
+version = "0.17.0.sse.1.0.0"
 
 description = \
     """
@@ -36,16 +36,14 @@ private_build_requires = [
     "PyOpenGL",
     "Jinja2",
     "PyYAML",
-    "PySide2",
-    "maya_devkit-2022",
+    "pyside2_setup",
     "qtbase-5.15.2",
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "python-2", "usd-20.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "python-3", "usd-20.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "python-2", "usd-21.08.sse.1", "!ptex"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "python-3", "usd-21.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "maya_devkit-2022", "python-2", "usd-21.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "maya_devkit-2022", "python-3", "usd-21.08.sse.1", "!ptex"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.0.sse.1", "maya_devkit-2023", "python-3", "usd-21.08.sse.1", "!ptex"],
 ]
 
 # If want to use Ninja, run:
@@ -79,5 +77,10 @@ def commands():
     env.MAYA_USD_ROOT.append("{root}")
     env.MAYA_USD_LOCATION.append("{root}")
 
+def post_commands():
+
     # For Maya to locate the .mod file to setup env variables for plugins and libraries
-    env.MAYA_MODULE_PATH.append("{root}")
+    # NOTE: We are prepending because the REZ package "maya" is appending the
+    # out-of-the-box modules, which includes mayaUSD.mod as well. We want us to be
+    # loaded as priority.
+    env.MAYA_MODULE_PATH.prepend("{root}")
