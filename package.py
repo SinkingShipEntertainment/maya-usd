@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.17.0.sse.1.1.0"
+version = "0.18.0.sse.1.0.0"
 
 description = \
     """
