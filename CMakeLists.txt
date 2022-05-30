@@ -26,13 +26,6 @@ endif()
 # REZ package for Maya is unsetting PYTHONHOME, so that MayaPy can run properly.
 # We need to reset it here.
 set(ENV{PYTHONHOME} $ENV{REZ_PYTHON_ROOT})
-#set(Python_ROOT_DIR $ENV{REZ_PYTHON_ROOT})
-#set(Python_EXECUTABLE $ENV{REZ_PYTHON_ROOT}/bin/python)
-#set(PYTHON_INCLUDE_DIR $ENV{REZ_PYTHON_ROOT}/include)
-#PYTHON_LIBRARIES
-#message(STATUS "   marcelo...... Python_ROOT_DIR   = ${Python_ROOT_DIR}")
-#message(STATUS "   marcelo...... Python_EXECUTABLE   = ${Python_EXECUTABLE}")
-#message(STATUS "   marcelo...... PYTHON_INCLUDE_DIR   = ${PYTHON_INCLUDE_DIR}")
 
 set(PXR_USD_LOCATION $ENV{USD_LOCATION})
 set(MARKUPSAFE_LOCATION $ENV{REZ_MARKUPSAFE_ROOT})
