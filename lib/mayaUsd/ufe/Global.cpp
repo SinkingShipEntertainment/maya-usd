@@ -183,22 +183,13 @@ MStatus initialize()
     // - Perform operations using the USD common transform API.
     // - Perform operations using a Maya transform stack.
     // - If the object is a point instance, use the point instance handler.
-    //auto fallbackHandler = MayaUsd::ufe::UsdTransform3dFallbackMayaXformStackHandler::create();
-    //auto matrixHandler = MayaUsd::ufe::UsdTransform3dMatrixOpHandler::create(fallbackHandler);
-    //auto commonAPIHandler = MayaUsd::ufe::UsdTransform3dCommonAPIHandler::create(matrixHandler);
-    //auto mayaStackHandler
-    //    = MayaUsd::ufe::UsdTransform3dMayaXformStackHandler::create(commonAPIHandler);
-    //auto pointInstanceHandler
-    //    = MayaUsd::ufe::UsdTransform3dPointInstanceHandler::create(mayaStackHandler);
-
-    // NOTE (Marcelo Sercheli): Forcing matrixHandler to be the high-priority after point instance
-    // Unfortunately matrixHandler is assuming the fallbackHandler is the next.
-    // See UsdTransform3dMatrixOp.cpp for details.
     auto fallbackHandler = MayaUsd::ufe::UsdTransform3dFallbackMayaXformStackHandler::create();
-    auto commonAPIHandler = MayaUsd::ufe::UsdTransform3dCommonAPIHandler::create(fallbackHandler);
-    auto mayaStackHandler = MayaUsd::ufe::UsdTransform3dMayaXformStackHandler::create(commonAPIHandler);
-    auto matrixHandler = MayaUsd::ufe::UsdTransform3dMatrixOpHandler::create(mayaStackHandler);
-    auto pointInstanceHandler = MayaUsd::ufe::UsdTransform3dPointInstanceHandler::create(matrixHandler);
+    auto matrixHandler = MayaUsd::ufe::UsdTransform3dMatrixOpHandler::create(fallbackHandler);
+    auto commonAPIHandler = MayaUsd::ufe::UsdTransform3dCommonAPIHandler::create(matrixHandler);
+    auto mayaStackHandler
+       = MayaUsd::ufe::UsdTransform3dMayaXformStackHandler::create(commonAPIHandler);
+    auto pointInstanceHandler
+       = MayaUsd::ufe::UsdTransform3dPointInstanceHandler::create(mayaStackHandler);
 
     handlers.transform3dHandler = pointInstanceHandler;
 
