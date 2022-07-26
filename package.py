@@ -38,7 +38,7 @@ private_build_requires = [
     "Jinja2",
     "PyYAML",
     "pyside2_setup",
-    "qtbase-5.15.2",
+    #"qtbase-5.15.2",
 ]
 
 variants = [
