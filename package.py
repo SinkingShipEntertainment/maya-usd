@@ -44,7 +44,7 @@ private_build_requires = [
 variants = [
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "maya_devkit-2022", "python-2.7.5", "usd-21.08"],
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "maya_devkit-2022", "python-3.7.7", "usd-21.08"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.0.sse.1", "maya_devkit-2023", "python-3.9.7", "usd-22.05"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.05"],
 ]
 
 # If want to use Ninja, run:
