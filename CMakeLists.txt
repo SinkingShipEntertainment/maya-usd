@@ -17,13 +17,36 @@ cmake_minimum_required(VERSION 3.13...3.17)
 
 project(maya-usd)
 
+################ REZ overrides (start)
+set(REZ_PXR_USE_PYTHON_3 OFF)
+if($ENV{REZ_PYTHON_VERSION} EQUAL "3.7.7")
+    set(REZ_PXR_USE_PYTHON_3 ON)
+    set(REZ_PYTHON_VERSION_STR "3.7")
+elseif($ENV{REZ_PYTHON_VERSION} EQUAL "3.9.7")
+    set(REZ_PXR_USE_PYTHON_3 ON)
+    set(REZ_PYTHON_VERSION_STR "3.9")
+endif()
+
+# REZ package for Maya is unsetting PYTHONHOME, so that MayaPy can run properly.
+# We need to reset it here.
+set(ENV{PYTHONHOME} $ENV{REZ_PYTHON_ROOT})
+
+set(PXR_USD_LOCATION $ENV{USD_LOCATION})
+set(MARKUPSAFE_LOCATION $ENV{REZ_MARKUPSAFE_ROOT})
+set(JINJA_LOCATION $ENV{REZ_JINJA2_ROOT})
+set(MAYA_DEVKIT_LOCATION "$ENV{DEVKIT_LOCATION}")
+set(QT_LOCATION "$ENV{QT_LOCATION}")
+set(AUTOGEN_PARALLEL "1")
+set(CMAKE_AUTOGEN_PARALLEL "1")
+################ REZ overrides (end)
+
 #------------------------------------------------------------------------------
 # options
 #------------------------------------------------------------------------------
 option(BUILD_MAYAUSD_LIBRARY "Build Core USD libraries." ON)
 option(BUILD_ADSK_PLUGIN "Build Autodesk USD plugin." ON)
-option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." ON)
-option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." ON)
+option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." OFF)
+option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." OFF)
 # Default value made dependent on maya + usd version - see below
 #   Convert back to a normal option if we no longer support maya-2019, or
 #   no longer support USD-20.11
@@ -32,11 +55,11 @@ option(BUILD_RFM_TRANSLATORS "Build translators for RenderMan for Maya shaders."
 option(BUILD_TESTS "Build tests." ON)
 option(BUILD_STRICT_MODE "Enforce all warnings as errors." ON)
 option(BUILD_SHARED_LIBS "Build libraries as shared or static." ON)
-option(BUILD_WITH_PYTHON_3 "Build with python 3." OFF)
+option(BUILD_WITH_PYTHON_3 "Build with python 3." ${REZ_PXR_USE_PYTHON_3})
 if(APPLE)
     option(BUILD_UB2 "Build Universal Binary 2 (UB2) Intel64+arm64" OFF)
 endif()
-set(BUILD_WITH_PYTHON_3_VERSION 3.7 CACHE STRING "The version of Python 3 to build with")
+set(BUILD_WITH_PYTHON_3_VERSION ${REZ_PYTHON_VERSION_STR} CACHE STRING "The version of Python 3 to build with")
 option(CMAKE_WANT_UFE_BUILD "Enable building with UFE (if found)." ON)
 option(CMAKE_WANT_MATERIALX_BUILD "Enable building with MaterialX (experimental)." OFF)
 
