@@ -30,7 +30,7 @@ with scope("config") as c:
     #c.build_thread_count = "physical_cores"
 
 requires = [
-    "!ptex",  # USD is built with ptex and without ptex. Ptex from USd cause Maya to crash.
+    "!ptex",  # USD is built with ptex and without ptex. Ptex from USD cause Maya to crash.
 ]
 
 private_build_requires = [
@@ -38,13 +38,13 @@ private_build_requires = [
     "Jinja2",
     "PyYAML",
     "pyside2_setup",
-    #"qtbase-5.15.2",
 ]
 
 variants = [
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "maya_devkit-2022", "python-2.7.5", "usd-21.08"],
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "maya_devkit-2022", "python-3.7.7", "usd-21.08"],
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.05"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.11"],
 ]
 
 # If want to use Ninja, run:
