@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.20.0.sse.1.0.0"
+version = "0.22.0.sse.1.0.0"
 
 description = """Maya USD plugin"""
 
@@ -26,8 +26,14 @@ with scope("config") as c:
 
     #c.build_thread_count = "physical_cores"
 
+
+# NOTE: Ptex from USD used to cause Maya to crash.
+# To fix that, USD is built with ptex and without ptex.
+# Up to Maya-Usd version 0.19, we have been building it forcing no Ptex.
+# Also, it could be Arnold (Maya plugin) that is causing it to crash.
+# This version (0.22) will be build allowing Ptex to see how it respond.
 requires = [
-    "!ptex",  # USD is built with ptex and without ptex. Ptex from USD cause Maya to crash.
+    # "!ptex",
 ]
 
 private_build_requires = [
