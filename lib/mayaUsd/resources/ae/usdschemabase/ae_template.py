@@ -127,7 +127,7 @@ class MetaDataCustomControl(object):
         # Metadata: Kind
         # We add the known Kind types, in a certain order ("model hierarchy") and then any
         # extra ones that were added by extending the kind registry.
-        # Note: we remove the "model" kind because in the USD docs it states, 
+        # Note: we remove the "model" kind because in the USD docs it states,
         #       "No prim should have the exact kind "model".
         allKinds = Kind.Registry.GetAllKinds()
         allKinds.remove(Kind.Tokens.model)
@@ -150,6 +150,10 @@ class MetaDataCustomControl(object):
 
         for ele in knownKinds:
             cmds.menuItem(label=ele)
+
+        # NOTE (Marcelo Sercheli): We don't allow users to modify kinds so
+        # SSE_ kinds are not assigned / modified by users.
+        cmds.optionMenuGrp(self.kind, edit=True, enable=False)
 
         # Metadata: Active
         self.active = cmds.checkBoxGrp(label='Active',
@@ -569,7 +573,7 @@ class AEShaderLayout(object):
             groups = tuple()
             if attributeInfo.uifolder:
                 groups = tuple(AEShaderLayout._groupSplitter.split(attributeInfo.uifolder))
-                # Ensure the parent groups are there 
+                # Ensure the parent groups are there
                 for i in range(len(groups)):
                     subgroup = groups[0:i+1]
                     if subgroup not in folderIndex:
@@ -682,7 +686,7 @@ class AETemplate(object):
             'UsdSkelAnimation' : 'SkelAnimation',
             'UsdSkelBlendShape': 'BlendShape',
             'UsdSkelSkeleton': 'Skeleton',
-            'UsdSkelRoot' : 'SkelRoot', 
+            'UsdSkelRoot' : 'SkelRoot',
             'UsdUI' : '',
             'UsdUtils' : '',
             'UsdVol' : ''
