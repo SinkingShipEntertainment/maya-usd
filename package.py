@@ -1,11 +1,11 @@
 name = "maya_usd"
 
+# NOTE: version = <mayausd_version>.sse.<sse_version>
+version = "0.19.0.sse.2.0.0"
+
 authors = [
     "Autodesk"
 ]
-
-# NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.19.0.sse.1.0.0"
 
 description = \
     """
@@ -41,10 +41,11 @@ private_build_requires = [
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "maya_devkit-2022", "python-2.7.5", "usd-21.08"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "maya_devkit-2022", "python-3.7.7", "usd-21.08"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.05"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.11"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.2", "maya_devkit-2022", "python-2.7.5", "usd-21.08"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2022.3.sse.3", "maya_devkit-2022", "python-3.7.7", "usd-21.08"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.05"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.11"],
+    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023", "maya_devkit-2023", "python-3.9.7", "usd-22.11.sse.2"],
 ]
 
 # If want to use Ninja, run:
