@@ -17,7 +17,12 @@ cmake_minimum_required(VERSION 3.13...3.17)
 
 project(maya-usd)
 
-################ REZ overrides (start)
+# --------------------------------------------
+# REZ
+# --------------------------------------------
+set(Boost_NO_BOOST_CMAKE ON)
+set(Boost_NO_SYSTEM_PATHS True)
+
 set(REZ_PXR_USE_PYTHON_3 OFF)
 if($ENV{REZ_PYTHON_VERSION} EQUAL "3.7.7")
     set(REZ_PXR_USE_PYTHON_3 ON)
@@ -38,7 +43,7 @@ set(MAYA_DEVKIT_LOCATION "$ENV{DEVKIT_LOCATION}")
 set(QT_LOCATION "$ENV{QT_LOCATION}")
 set(AUTOGEN_PARALLEL "1")
 set(CMAKE_AUTOGEN_PARALLEL "1")
-################ REZ overrides (end)
+# --------------------------------------------
 
 #------------------------------------------------------------------------------
 # options
