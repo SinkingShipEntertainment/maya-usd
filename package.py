@@ -5,25 +5,13 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.22.0.sse.1.0.1"
+version = "0.23.0.sse.1.0.0"
 
 description = """Maya USD plugin"""
 
 with scope("config") as c:
-    # Determine location to release: internal (int) vs external (ext)
-
-    # NOTE: Modify this variable to reflect the current package situation
-    release_as = "ext"
-
-    # The `c` variable here is actually rezconfig.py
-    # `release_packages_path` is a variable defined inside rezconfig.py
-
     import os
-    if release_as == "int":
-        c.release_packages_path = os.environ["SSE_REZ_REPO_RELEASE_INT"]
-    elif release_as == "ext":
-        c.release_packages_path = os.environ["SSE_REZ_REPO_RELEASE_EXT"]
-
+    c.release_packages_path = os.environ["SSE_REZ_REPO_RELEASE_EXT"]
     #c.build_thread_count = "physical_cores"
 
 
@@ -31,7 +19,7 @@ with scope("config") as c:
 # To fix that, USD is built with ptex and without ptex.
 # Up to Maya-Usd version 0.19, we have been building it forcing no Ptex.
 # Also, it could be Arnold (Maya plugin) that is causing it to crash.
-# This version (0.22) will be build allowing Ptex to see how it respond.
+# This version will be build allowing Ptex to see how it respond.
 requires = [
     # "!ptex",
 ]
@@ -54,8 +42,8 @@ variants = [
 # rez-release --cmake-build-system "ninja"
 #
 # Pass cmake arguments:
-# rez-build -i -- -DBoost_NO_BOOST_CMAKE=On -DBoost_NO_SYSTEM_PATHS=True
-# rez-release -- -DBoost_NO_BOOST_CMAKE=On -DBoost_NO_SYSTEM_PATHS=True
+# rez-build -i
+# rez-release
 
 uuid = "repository.maya-usd"
 
