@@ -32,8 +32,8 @@ private_build_requires = [
 ]
 
 variants = [
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.0", "maya_devkit-2023.0", "python-3.9.7", "usd-22.11"],
-    ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.2", "maya_devkit-2023.2", "python-3.9.7", "usd-22.11"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.0", "maya_devkit-2023.0", "python-3.9.7", "usd-22.11"],
+    # ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.2", "maya_devkit-2023.2", "python-3.9.7", "usd-22.11"],
     ["platform-linux", "arch-x86_64", "os-centos-7", "maya-2023.3", "maya_devkit-2023.3", "python-3.9.7", "usd-22.11"],
 ]
 
