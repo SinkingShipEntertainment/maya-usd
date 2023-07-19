@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.23.0.sse.1.0.0"
+version = "0.24.0.sse.1.0.0"
 
 description = """Maya USD plugin"""
 
