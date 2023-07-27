@@ -105,7 +105,7 @@ struct MergePrimsOptions
 
     // Ignore variants when building the edit target.
     // Used when the destination variants have already been set by the caller.
-    bool ignoreVariants { false };
+    bool ignoreVariants { true };  // (Marcelo): this authors the variant sets and variants, which we don't want
 
     // If true, the merge is done in a temporary layer so to ignore opinions
     // from upper layers (and children of upper layers).
