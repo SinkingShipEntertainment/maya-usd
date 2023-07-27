@@ -5,23 +5,20 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.24.0.sse.1.0.0"
+version = "0.24.0.sse.1.0.1"
 
 description = """Maya USD plugin"""
 
 with scope("config") as c:
     import os
     c.release_packages_path = os.environ["SSE_REZ_REPO_RELEASE_EXT"]
-    #c.build_thread_count = "physical_cores"
+    c.build_thread_count = "physical_cores"
 
 
 # NOTE: Ptex from USD used to cause Maya to crash.
 # To fix that, USD is built with ptex and without ptex.
-# Up to Maya-Usd version 0.19, we have been building it forcing no Ptex.
-# Also, it could be Arnold (Maya plugin) that is causing it to crash.
-# This version will be build allowing Ptex to see how it respond.
 requires = [
-    # "!ptex",
+    "!ptex",
 ]
 
 private_build_requires = [
@@ -48,7 +45,8 @@ variants = [
 uuid = "repository.maya-usd"
 
 def pre_build_commands():
-    command("source /opt/rh/devtoolset-6/enable")
+    # command("source /opt/rh/devtoolset-6/enable")
+    command("source /opt/rh/devtoolset-9/enable")
 
 def commands():
 
