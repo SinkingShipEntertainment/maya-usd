@@ -21,10 +21,11 @@ private_build_requires = [
     "Jinja2",
     "PyYAML",
     "PySide2",
+    "maya_devkit",
 ]
 
 variants = [
-    ["maya-2024.2", "maya_devkit-2024.2", "python-3.9", "usd-23.11"],
+    ["maya-2024.2", "python-3.9", "usd-23.11"],
 ]
 
 # If want to use Ninja, run:
