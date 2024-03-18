@@ -22,18 +22,18 @@ project(maya-usd)
 #------------------------------------------------------------------------------
 option(BUILD_MAYAUSD_LIBRARY "Build Core USD libraries." ON)
 option(BUILD_ADSK_PLUGIN "Build Autodesk USD plugin." ON)
-option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." ON)
-option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." ON)
+option(BUILD_PXR_PLUGIN "Build the Pixar USD plugin and libraries." OFF) # Marcelo: was ON
+option(BUILD_AL_PLUGIN "Build the Animal Logic USD plugin and libraries." OFF) # Marcelo: was ON
 option(BUILD_HDMAYA "Build the legacy Maya-To-Hydra plugin and scene delegate." OFF)
-option(BUILD_RFM_TRANSLATORS "Build translators for RenderMan for Maya shaders." ON)
-option(BUILD_TESTS "Build tests." ON)
+option(BUILD_RFM_TRANSLATORS "Build translators for RenderMan for Maya shaders." OFF) # Marcelo: was ON
+option(BUILD_TESTS "Build tests." OFF) # Marcelo: was ON
 option(BUILD_STRICT_MODE "Enforce all warnings as errors." ON)
 option(BUILD_SHARED_LIBS "Build libraries as shared or static." ON)
-option(BUILD_WITH_PYTHON_3 "Build with python 3." OFF)
+option(BUILD_WITH_PYTHON_3 "Build with python 3." ON) # Marcelo: was OFF
 if(APPLE)
     option(BUILD_UB2 "Build Universal Binary 2 (UB2) Intel64+arm64" OFF)
 endif()
-set(BUILD_WITH_PYTHON_3_VERSION 3.7 CACHE STRING "The version of Python 3 to build with")
+set(BUILD_WITH_PYTHON_3_VERSION 3.9 CACHE STRING "The version of Python 3 to build with") # Marcelo: was 3.7
 option(CMAKE_WANT_MATERIALX_BUILD "Enable building with MaterialX." ON)
 option(CMAKE_WANT_VALIDATE_UNDO_ITEM "Enable validating undo items list." OFF)
 
@@ -172,7 +172,7 @@ else()
         set(Qt_FOUND TRUE)
     endif()
 endif()
-    
+
 if(NOT Qt_FOUND)
     message(SEND_ERROR "Could not find Qt in Maya devkit directory: ${MAYA_DEVKIT_LOCATION}.")
     if(MAYA_APP_VERSION VERSION_GREATER 2024)
