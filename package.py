@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.28.0.sse.1.0.0"
+version = "0.28.0.sse.2.0.0"
 
 description = """Maya USD plugin"""
 
@@ -20,12 +20,13 @@ private_build_requires = [
     "PyOpenGL",
     "Jinja2",
     "PyYAML",
-    "PySide2",
+    "PySide6",
     "maya_devkit",
 ]
 
 variants = [
     ["maya-2024.2", "python-3.9", "usd-23.11"],
+    ["maya-2025.1", "python-3.11", "usd-23.11"],
 ]
 
 # If want to use Ninja, run:
