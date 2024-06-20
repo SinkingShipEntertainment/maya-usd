@@ -34,7 +34,13 @@ option(BUILD_WITH_PYTHON_3 "Build with python 3." ON) # Marcelo: was OFF
 if(APPLE)
     option(BUILD_UB2 "Build Universal Binary 2 (UB2) Intel64+arm64" OFF)
 endif()
-set(BUILD_WITH_PYTHON_3_VERSION 3.9 CACHE STRING "The version of Python 3 to build with") # Marcelo: was 3.7
+
+if($ENV{REZ_PYTHON_VERSION} EQUAL "3.9.7")
+    set(BUILD_WITH_PYTHON_3_VERSION 3.9 CACHE STRING "The version of Python 3 to build with")
+elseif($ENV{REZ_PYTHON_VERSION} EQUAL "3.11.7")
+    set(BUILD_WITH_PYTHON_3_VERSION 3.11 CACHE STRING "The version of Python 3 to build with")
+endif()
+
 option(CMAKE_WANT_MATERIALX_BUILD "Enable building with MaterialX." ON)
 option(CMAKE_WANT_VALIDATE_UNDO_ITEM "Enable validating undo items list." OFF)
 
