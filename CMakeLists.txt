@@ -37,6 +37,8 @@ endif()
 
 if($ENV{REZ_PYTHON_VERSION} EQUAL "3.9.7")
     set(BUILD_WITH_PYTHON_3_VERSION 3.9 CACHE STRING "The version of Python 3 to build with")
+elseif($ENV{REZ_PYTHON_VERSION} EQUAL "3.10.14")
+    set(BUILD_WITH_PYTHON_3_VERSION 3.10 CACHE STRING "The version of Python 3 to build with")
 elseif($ENV{REZ_PYTHON_VERSION} EQUAL "3.11.7")
     set(BUILD_WITH_PYTHON_3_VERSION 3.11 CACHE STRING "The version of Python 3 to build with")
 endif()

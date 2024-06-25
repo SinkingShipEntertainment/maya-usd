@@ -5,7 +5,7 @@ authors = [
 ]
 
 # NOTE: version = <mayausd_version>.sse.<sse_version>
-version = "0.28.0.sse.2.0.0"
+version = "0.28.0.sse.3.0.0"
 
 description = """Maya USD plugin"""
 
@@ -25,8 +25,9 @@ private_build_requires = [
 ]
 
 variants = [
-    ["maya-2024.2", "python-3.9", "usd-23.11"],
+    ["maya-2024.2", "python-3.9", "usd-23.11"],  # maya 2024 uses python3-10
     ["maya-2025.1", "python-3.11", "usd-23.11"],
+    ["maya-2024.2", "python-3.10", "usd-23.11"],
 ]
 
 # If want to use Ninja, run:
