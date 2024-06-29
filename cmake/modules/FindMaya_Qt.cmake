@@ -17,6 +17,7 @@
 
 # List of directories to search for Maya Qt headers/libraries/executables.
 set(MAYA_DIRS_TO_SEARCH
+    $ENV{QT_LOCATION}   # This is defined in maya_devkit package
     ${MAYA_DEVKIT_LOCATION}
     $ENV{MAYA_DEVKIT_LOCATION}
     ${MAYA_LOCATION}
@@ -64,6 +65,7 @@ foreach(Maya_Qt_Utility ${Maya_Qt_Utilities})
             $ENV{MAYA_LOCATION}
             ${MAYA_BASE_DIR}
         PATH_SUFFIXES
+            Qt/libexec  # Qt executables are stored in this folder in maya_devkit 2025
             devkit/bin
             bin
         NO_DEFAULT_PATH
@@ -121,7 +123,7 @@ foreach(Maya_Qt_LIB ${Maya_Qt_FIND_COMPONENTS})
         set(__target_name "Qt${QT_VERSION_MAJOR}::${Maya_Qt_LIB}")
         add_library(${__target_name} SHARED IMPORTED GLOBAL)
         set_target_properties(${__target_name} PROPERTIES INTERFACE_INCLUDE_DIRECTORIES "${MAYA_QT_${MAYA_QT_LIB}_DIR};${MAYA_QT_INC_DIR}")
-        set_target_properties(${__target_name} PROPERTIES IMPORTED_CONFIGURATIONS RELEASE) # RELEASE? 
+        set_target_properties(${__target_name} PROPERTIES IMPORTED_CONFIGURATIONS RELEASE) # RELEASE?
         set_target_properties(${__target_name} PROPERTIES IMPORTED_LOCATION "${MAYA_QT${MAYA_QT_LIB}_LIBRARY}")
         if(IS_WINDOWS)
             set_target_properties(${__target_name} PROPERTIES IMPORTED_IMPLIB "${MAYA_QT${MAYA_QT_LIB}_LIBRARY}")
