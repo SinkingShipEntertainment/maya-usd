@@ -28,6 +28,7 @@ variants = [
     ["maya-2024.2", "python-3.9", "usd-23.11"],  # maya 2024 uses python3-10
     ["maya-2024.2", "python-3.10", "usd-23.11"],
     ["maya-2025.1", "python-3.11", "usd-23.11"],
+    ["maya-2025.3", "python-3.11", "usd-23.11"],
 ]
 
 # If want to use Ninja, run:
