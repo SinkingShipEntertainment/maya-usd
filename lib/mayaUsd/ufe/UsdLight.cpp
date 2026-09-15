@@ -175,25 +175,23 @@ bool getLightShadowEnable(const UsdPrim& prim)
     const UsdLuxShadowAPI shadowAPI(prim);
     PXR_NS::UsdAttribute  lightAttribute = shadowAPI.GetShadowEnableAttr();
 
-    if (!lightAttribute) {
-        // If the shadow enable attribute is not created yet, create one here
-        lightAttribute = shadowAPI.CreateShadowEnableAttr(VtValue(true));
-        return true;
+    bool val = true;
+    if (lightAttribute) {
+        lightAttribute.Get(&val);
     }
-
-    bool val = false;
-    lightAttribute.Get(&val);
     return val;
 }
 
 void setLightShadowEnable(const UsdPrim& prim, bool attrVal)
 {
-    const UsdLuxShadowAPI      shadowAPI(prim);
-    const PXR_NS::UsdAttribute lightAttribute = shadowAPI.GetShadowEnableAttr();
+    UsdLuxShadowAPI      shadowAPI = UsdLuxShadowAPI::Apply(prim);
+    PXR_NS::UsdAttribute lightAttribute = shadowAPI.GetShadowEnableAttr();
 
-    if (lightAttribute) {
-        lightAttribute.Set(attrVal);
+    if (!lightAttribute) {
+        lightAttribute = shadowAPI.CreateShadowEnableAttr();
     }
+
+    lightAttribute.Set(attrVal);
 }
 
 Ufe::Light::ShadowEnableUndoableCommand::Ptr UsdLight::shadowEnableCmd(bool se)
@@ -213,20 +211,21 @@ Ufe::Color3f getLightShadowColor(const UsdPrim& prim)
     const UsdLuxShadowAPI shadowAPI(prim);
     PXR_NS::UsdAttribute  lightAttribute = shadowAPI.GetShadowColorAttr();
 
-    if (!lightAttribute) {
-        // If the shadow color attribute is not created yet, create one here
-        lightAttribute = shadowAPI.CreateShadowColorAttr();
-    }
-
     GfVec3f val(0.f, 0.f, 0.f);
-    lightAttribute.Get(&val);
+    if (lightAttribute) {
+        lightAttribute.Get(&val);
+    }
     return Ufe::Color3f(val[0], val[1], val[2]);
 }
 
 void setLightShadowColor(const UsdPrim& prim, const Ufe::Color3f& attrVal)
 {
-    const UsdLuxShadowAPI      shadowAPI(prim);
-    const PXR_NS::UsdAttribute lightAttribute = shadowAPI.GetShadowColorAttr();
+    UsdLuxShadowAPI      shadowAPI = UsdLuxShadowAPI::Apply(prim);
+    PXR_NS::UsdAttribute lightAttribute = shadowAPI.GetShadowColorAttr();
+
+    if (!lightAttribute) {
+        lightAttribute = shadowAPI.CreateShadowColorAttr();
+    }
 
     lightAttribute.Set(GfVec3f(attrVal.r(), attrVal.g(), attrVal.b()));
 }
